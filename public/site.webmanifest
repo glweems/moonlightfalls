@@ -1,0 +1,21 @@
+{
+    "name": "Moonlight Falls Property Management",
+    "short_name": "Moonlight Falls",
+    "description": "Moonlight Falls Property Management is a property management company that specializes in the management of residential properties. We are a full service property management company that provides a full range of services to our clients. We are dedicated to providing the highest level of service to our clients and we are committed to providing the highest level of service to our clients.",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#b29e59",
+    "background_color": "#3F3A37",
+    "display": "standalone",
+    "start_url": "/"
+}
