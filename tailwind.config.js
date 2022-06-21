@@ -1,6 +1,6 @@
 const themes = require("daisyui/src/colors/themes");
-const theme = require("daisyui/src/colors/themes")["[data-theme=emerald]"];
-console.log("theme: ", theme);
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
