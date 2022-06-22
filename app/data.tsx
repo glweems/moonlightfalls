@@ -18,6 +18,15 @@ export const company = {
   url: "https://moonlightfalls.com",
   logo: "https://moonlightfalls.com/logo.png",
   copyright: `Copyright © ${new Date().getFullYear()} - All right reserved by Moonlight Falls`,
+  contact: {
+    email: "christilyn74@gmail.com",
+    phone: "2147187017",
+    facebook: {
+      username: "MoonlightFallsStJo",
+      url: "https://facebook.com/MoonlightFallsStJo",
+    },
+    messenger: "https://m.me/MoonlightFallsStJo",
+  },
 };
 
 export const sitemap: SiteMapLink[] = [

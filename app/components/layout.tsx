@@ -1,7 +1,15 @@
 import { Link, NavLink } from "@remix-run/react";
 import type { FC, MouseEventHandler } from "react";
 import { Fragment, useState } from "react";
-import { Bed, Menu, X } from "tabler-icons-react";
+import {
+  Bed,
+  Menu,
+  Phone,
+  X,
+  MailOpened,
+  BrandMessenger,
+  BrandFacebook,
+} from "tabler-icons-react";
 import { company, sitemap } from "~/data";
 
 export const Navbar: FC = () => (
@@ -85,4 +93,43 @@ export const Footer: FC = () => (
       <p>{company.copyright}</p>
     </div>
   </footer>
+);
+
+export const ContactOptions: FC = () => (
+  <ul className="rounded-box w-full p-2 text-xl list-none">
+    <li className="p-2">
+      <a href="tel:2147187017" className="flex items-center">
+        <Phone size={20} className="mr-3" />
+        (214) 718-7017
+      </a>
+    </li>
+
+    <li className="p-2">
+      <a href="mailto:Christilyn74@gmail.com" className="flex items-center">
+        <MailOpened size={20} className="mr-3" />
+        <span>christilyn74@gmail.com</span>
+      </a>
+    </li>
+
+    <li className="hover:stroke-blue-600 p-2">
+      <a
+        href={company.contact.messenger}
+        target="_blank"
+        className="flex items-center"
+      >
+        <BrandMessenger size={26} className=" mr-3" />
+        Messenger
+      </a>
+    </li>
+    <li className="p-2">
+      <a
+        href={company.contact.facebook.url}
+        target="_blank"
+        className="flex items-center"
+      >
+        <BrandFacebook size={26} className="mr-3" />
+        Facebook
+      </a>
+    </li>
+  </ul>
 );

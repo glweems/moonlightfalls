@@ -24,8 +24,9 @@ export default function Index() {
               Maximize Your Short-Term Rental for Less
             </h1>
             <p className="mb-5">
-              Evolve partners with you and takes on the time-consuming tasks of
-              vacation rental management so you can earn more and stress less.
+              Professional vacation rental hosting and management. We provide
+              guest-driven hospitality services in North Texas including event
+              planning & concierge services.
             </p>
             <button className="btn btn-primary">Get Started</button>
           </div>
