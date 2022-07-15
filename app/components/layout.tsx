@@ -1,5 +1,5 @@
 import { Link, NavLink } from "@remix-run/react";
-import type { FC, MouseEventHandler } from "react";
+import type { FC, HTMLAttributes, MouseEventHandler } from "react";
 import { Fragment, useState } from "react";
 import {
   Bed,
@@ -95,23 +95,23 @@ export const Footer: FC = () => (
   </footer>
 );
 
-export const ContactOptions: FC = () => (
-  <ul className="rounded-box w-full p-2 text-xl list-none">
-    <li className="p-2">
+export const ContactOptions: FC<HTMLAttributes<HTMLUListElement>> = (props) => (
+  <ul {...props}>
+    <li className=" my-3">
       <a href="tel:2147187017" className="flex items-center">
         <Phone size={20} className="mr-3" />
         (214) 718-7017
       </a>
     </li>
 
-    <li className="p-2">
+    <li className="py-4">
       <a href="mailto:Christilyn74@gmail.com" className="flex items-center">
         <MailOpened size={20} className="mr-3" />
         <span>christilyn74@gmail.com</span>
       </a>
     </li>
 
-    <li className="hover:stroke-blue-600 p-2">
+    <li className="hover:stroke-blue-600 py-4">
       <a
         href={company.contact.messenger}
         target="_blank"
@@ -121,7 +121,7 @@ export const ContactOptions: FC = () => (
         Messenger
       </a>
     </li>
-    <li className="p-2">
+    <li className="py-4">
       <a
         href={company.contact.facebook.url}
         target="_blank"

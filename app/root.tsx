@@ -68,7 +68,7 @@ export default function App() {
         <meta name="msapplication-TileColor" content="#b29e59" />
         <meta name="theme-color" content="#b29e59" />
       </head>
-      <body>
+      <body className="overscroll-contain">
         <Navbar />
         <Outlet />
         <Footer />

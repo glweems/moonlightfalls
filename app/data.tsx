@@ -29,6 +29,37 @@ export const company = {
   },
 };
 
+export const managementFeatures = [
+  {
+    text: "Higher Profit Margins Than Your Traditional Rental Portfolio",
+    icon: <BuildingLighthouse />,
+  },
+  {
+    text: "In House Cleaning Service Prepares Property for The Next Guest",
+    icon: <ReportMoney />,
+  },
+  {
+    text: "24/7 Booking Customer Service and Maintenance Requests Taken Care of Around The Clock",
+    icon: <ReportMoney />,
+  },
+];
+
+/*
+
+/*
+
+Higher Profit Margins Than Your Traditional Rental Portfolio
+
+
+
+
+
+
+In House Cleaning Service Prepares Property for The Next Guest
+
+24/7 Booking Customer Service and Maintenance Requests Taken Care of Around The Clock
+*/
+
 export const sitemap: SiteMapLink[] = [
   {
     title: "About",
@@ -70,7 +101,4 @@ export const landingPoints: LandingPoint[] = [
     icon: BuildingLighthouse,
   },
 ];
-/*
 
-
-*/

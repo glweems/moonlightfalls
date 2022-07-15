@@ -1,100 +1,77 @@
-import { useLoaderData } from "@remix-run/react";
-export type ContactFormFields = {
-  name: string;
-  email: string;
-  msg: string;
-};
-import {
-  useField,
-  useFormContext,
-  useIsSubmitting,
-  ValidatedForm,
-} from "remix-validated-form";
-import React, { FC, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
-import { validator } from "~/routes/contact";
+import React from "react";
+import { Form as RemixForm, FormProps } from "remix-forms";
+import { SomeZodObject } from "zod";
+import { cx } from "~/helpers";
 
-type ContactFormProps = {
-  defaultValues: ContactFormFields;
-};
-export const ContactForm: FC<ContactFormProps> = ({ defaultValues }) => {
+export function Field({ className, ...props }: JSX.IntrinsicElements["div"]) {
   return (
-    <section className="max-w-sm">
-      <h1 className=" text-2xl font-bold">Got any questions?</h1>
-      <p>Let’s talk about it.</p>
-      <small>
-        Send us a message and we will respond within 24 hours. Also in the
-        weekend.
-      </small>
-      <ValidatedForm
-        id="contact"
-        method="post"
-        validator={validator}
-        defaultValues={defaultValues}
-        className="w-full py-4 mx-auto my-4"
-      >
-        {/* FIRST NAME */}
-        <MyInput name="name" placeholder="Name" className={inputClassName} />
-        {/* EMAIL */}
-        <MyInput
-          name="email"
-          placeholder="Email"
-          type="email"
-          className={inputClassName}
-        />
-        {/* MESSAGE */}
-        <MyInput
-          name="msg"
-          placeholder="Message..."
-          element="textarea"
-          className="textarea textarea-bordered w-full"
-          rows={5}
-        />
-        {/* SUBMIT */}
-        <div className="form-control w-full my-4">
-          <MySubmitButton />
-        </div>
-      </ValidatedForm>
-    </section>
+    <div className={cx("form-control w-full my-4", className)} {...props} />
   );
-};
-export const inputClassName = `input input-bordered w-full`;
+}
+function Button({ className, ...props }: JSX.IntrinsicElements["button"]) {
+  return <button className={cx("btn", className)} {...props} />;
+}
 
-type MyInputProps =
-  | InputHTMLAttributes<HTMLInputElement> &
-      (TextareaHTMLAttributes<HTMLTextAreaElement> & {
-        name: string;
-        label?: string;
-        element?: "input" | "textarea";
-      });
-
-export const MyInput = ({
-  element = "input",
-  name,
-  label,
-  ...props
-}: MyInputProps) => {
-  const { error, getInputProps } = useField(name);
+const Input = React.forwardRef<
+  HTMLInputElement,
+  JSX.IntrinsicElements["input"]
+>(({ type = "text", className, ...props }, ref) => (
+  <input
+    ref={ref}
+    type={type}
+    className={cx(
+      "input",
+      className,
+      !className && " focus:ring-blue-500 focus:border-blue-500"
+    )}
+    {...props}
+  />
+));
+function SubmitButton(props: JSX.IntrinsicElements["button"]) {
   return (
-    <div className="form-control w-full mb-4">
-      {label && <label htmlFor={name}>{label}</label>}
-      {error && <small className="mb-2 text-right text-red-800">{error}</small>}
-      {React.createElement(element, { ...getInputProps(), ...props })}
+    <div className="flex justify-end">
+      <Button {...props} />
     </div>
   );
-};
+}
+const TextArea = React.forwardRef<
+  HTMLTextAreaElement,
+  JSX.IntrinsicElements["textarea"]
+>(({ className, ...props }, ref) => (
+  <textarea
+    ref={ref}
+    className={cx(
+      "textarea",
+      className,
+      !className && "border-base-400 focus:ring-blue-500 focus:border-blue-500"
+    )}
+    {...props}
+  />
+));
 
-export const MySubmitButton = () => {
-  const isSubmitting = useIsSubmitting();
-  const { isValid } = useFormContext();
-  const disabled = isSubmitting || !isValid;
-
+export default function Form<Schema extends SomeZodObject>(
+  props: FormProps<Schema>
+) {
   return (
-    <button
-      type="submit"
-      disabled={disabled}
-      className={!disabled ? "btn btn-primary" : "btn btn-disabled"}
-    >
-      {isSubmitting ? "Submitting..." : "Submit"}
-    </button>
+    <RemixForm<Schema>
+      multiline={["msg"]}
+      inputComponent={Input}
+      multilineComponent={TextArea}
+      fieldComponent={Field}
+      buttonComponent={SubmitButton}
+      {...props}
+    ></RemixForm>
   );
-};
+}
+// className={/* your form classes */}
+// fieldComponent={/* your custom Field */}
+// labelComponent={/* your custom Label */}
+// inputComponent={/* your custom Input */}
+// multilineComponent={/* your custom Multiline */}
+// selectComponent={/* your custom Select */}
+// checkboxComponent={/* your custom Checkbox */}
+// checkboxWrapperComponent={/* your custom checkbox wrapper */}
+// buttonComponent={/* your custom Button */}
+// fieldErrorsComponent={/* your custom FieldErrors */}
+// globalErrorsComponent={/* your custom GlobalErrors */}
+// errorComponent={/* your custom Error */}

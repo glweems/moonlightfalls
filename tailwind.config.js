@@ -16,16 +16,20 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    require("daisyui"),
+  ],
   daisyui: {
     themes: [
-      {
-        emerald: {
-          ...themes["[data-theme=dark]"],
-          primary: "#b29e59",
-        },
-        dark: { ...themes["[data-theme=dark]"], primary: "#b29e59" },
-      },
+      // {
+      //   emerald: {
+      //     ...themes["[data-theme=dark]"],
+      //     primary: "#b29e59",
+      //   },
+      //   dark: { ...themes["[data-theme=dark]"], primary: "#b29e59" },
+      // },
     ],
     styled: true,
     base: true,
@@ -33,7 +37,7 @@ module.exports = {
     logs: true,
     rtl: false,
     prefix: "",
-    theme: "dark",
+    theme: "pastel",
     // darkTheme: "dark",
   },
 };
