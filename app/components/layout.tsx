@@ -1,14 +1,11 @@
-import { Link, NavLink } from "@remix-run/react";
+import { NavLink } from "@remix-run/react";
 import type { FC, HTMLAttributes, MouseEventHandler } from "react";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import {
-  Bed,
-  Menu,
-  Phone,
-  X,
-  MailOpened,
-  BrandMessenger,
   BrandFacebook,
+  BrandMessenger,
+  MailOpened,
+  Phone,
 } from "tabler-icons-react";
 import { company, sitemap } from "~/data";
 import { cx } from "~/helpers";
@@ -21,11 +18,8 @@ export const Navbar: FC = () => {
     setOpen((current) => !current);
   };
   return (
-    <nav
-      className="flex items-center w-full h-24 bg-indigo-600 select-none"
-      x-data="{ showMenu: false }"
-    >
-      <div className="md:justify-center relative flex flex-wrap items-center justify-between w-full h-24 mx-auto font-medium">
+    <nav className="flex items-center w-full h-24 bg-indigo-600 select-none">
+      <div className="relative flex  items-center justify-between w-full h-24 mx-auto font-medium">
         <NavLink to="/" className="md:pl-4 md:py-0 w-1/3 py-4 pl-6 pr-4">
           <span className="p-1 text-xl font-black leading-none text-white select-none">
             <span>Moonlight Falls</span>
@@ -35,7 +29,7 @@ export const Navbar: FC = () => {
         <div
           className={cx(
             !open && "hidden",
-            "md:text-sm lg:text-base md:w-3/4 md:bg-transparent md:p-0 md:relative md:flex justify-center fixed top-0 left-0 z-40 items-center  w-full h-full p-3 text-xl bg-gray-900 bg-opacity-50"
+            "md:text-sm lg:text-base  md:bg-transparent md:p-0 md:relative md:flex justify-center fixed top-0 left-0 z-40 items-center  w-full h-full p-3 text-xl bg-gray-900 bg-opacity-50"
           )}
         >
           <div className="md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto flex-col w-full overflow-hidden bg-white rounded-lg select-none">
@@ -54,7 +48,7 @@ export const Navbar: FC = () => {
           </div>
         </div>
         <button
-          className="md:hidden hover:bg-gray-900 hover:bg-opacity-10 absolute right-0 z-50 flex flex-col items-end w-10 h-10 p-2 mr-4 text-gray-100 rounded-full cursor-pointer"
+          className=" md:hidden hover:bg-gray-900 hover:bg-opacity-10 absolute right-0 z-50 flex flex-col items-end w-10 h-10 p-2 mr-4 text-gray-100 rounded-full cursor-pointer"
           onClick={handleClick}
         >
           {open ? (
