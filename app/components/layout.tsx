@@ -11,89 +11,141 @@ import {
   BrandFacebook,
 } from "tabler-icons-react";
 import { company, sitemap } from "~/data";
+import { cx } from "~/helpers";
 
-export const Navbar: FC = () => (
-  <div className="navbar bg-base-100">
-    <div className="flex-1">
-      <NavLink to="/" className="btn btn-ghost text-xl normal-case">
-        {company.name}
-      </NavLink>
-    </div>
-    <div className="flex-none">
-      <ul className="menu menu-horizontal p-0">
-        {sitemap.map((item) => (
-          <li key={item.path}>
-            <NavLink
-              to={item.path}
-              className={({ isActive }) =>
-                [
-                  isActive
-                    ? "text-primary"
-                    : "text-base-500 hover:text-base-300/75",
-                  "transition",
-                ].join(" ")
-              }
-            >
-              {item.title}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </div>
-);
-
-export const Footer: FC = () => (
-  <footer className="footer footer-center bg-base-200 text-base-content p-10 rounded">
-    <div className="grid grid-flow-col gap-4">
-      {sitemap.map((item) => (
-        <NavLink key={item.path} to={item.path}>
-          {item.title}
+export const Navbar: FC = () => {
+  const [open, setOpen] = useState(false);
+  const handleClick = (e) => {
+    setOpen((current) => !current);
+  };
+  return (
+    <nav
+      className="flex items-center w-full h-24 bg-indigo-600 select-none"
+      x-data="{ showMenu: false }"
+    >
+      <div className="md:justify-center relative flex flex-wrap items-center justify-between w-full h-24 mx-auto font-medium">
+        <NavLink to="/" className="md:pl-4 md:py-0 w-1/3 py-4 pl-6 pr-4">
+          <span className="p-1 text-xl font-black leading-none text-white select-none">
+            <span>Moonlight Falls</span>
+            <span className="text-indigo-300">.</span>
+          </span>
         </NavLink>
-      ))}
-    </div>
-    <div>
-      <div className="grid grid-flow-col gap-4">
-        <a>
+        <div
+          className={cx(
+            !open && "hidden",
+            "md:text-sm lg:text-base md:w-3/4 md:bg-transparent md:p-0 md:relative md:flex justify-center fixed top-0 left-0 z-40 items-center  w-full h-full p-3 text-xl bg-gray-900 bg-opacity-50"
+          )}
+        >
+          <div className="md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto flex-col w-full overflow-hidden bg-white rounded-lg select-none">
+            s
+            <div className="md:text-indigo-200 md:mt-0 md:flex-row md:items-center flex flex-col items-center justify-end w-full h-full mt-12 text-center text-indigo-700">
+              {sitemap.map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  onClick={handleClick}
+                  className="md:text-white md:px-0 lg:mx-3 md:text-center inline-block px-4 py-2 mx-2 font-medium text-left text-indigo-700"
+                >
+                  {link.title}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </div>
+        <button
+          className="md:hidden hover:bg-gray-900 hover:bg-opacity-10 absolute right-0 z-50 flex flex-col items-end w-10 h-10 p-2 mr-4 text-gray-100 rounded-full cursor-pointer"
+          onClick={handleClick}
+        >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            className="w-6 h-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             viewBox="0 0 24 24"
-            className="fill-current"
+            stroke="currentColor"
+            style={{ display: open ? "none" : "block" }}
           >
-            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
-        </a>
-        <a>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            className="stock-indigo-600 w-6 h-6"
+            x-show="showMenu"
+            fill="none"
+            stroke="indigo-600"
             viewBox="0 0 24 24"
-            className="fill-current"
-          >
-            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-          </svg>
-        </a>
-        <a>
-          <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            className="fill-current"
+            style={{ display: !open ? "none" : "block" }}
           >
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
           </svg>
-        </a>
+        </button>
       </div>
-    </div>
-    <div>
-      <p>{company.copyright}</p>
-    </div>
-  </footer>
-);
+    </nav>
+  );
+};
+
+export const Footer: FC = () => {
+  const year = new Date().getFullYear();
+  return (
+    <footer className="bg-white">
+      <div className="sm:px-6 lg:px-8 max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden">
+        <nav className="flex flex-wrap justify-center -mx-5 -my-2">
+          {sitemap.map((link) => (
+            <div key={link.path} className="px-5 py-2">
+              <NavLink
+                to={link.path}
+                className="hover:text-gray-900 text-base leading-6 text-gray-500"
+              >
+                {link.title}
+              </NavLink>
+            </div>
+          ))}
+        </nav>
+        <div className="flex justify-center mt-8 space-x-6">
+          <a
+            href="tel:2147187017"
+            className="hover:text-gray-500 text-gray-400"
+          >
+            <Phone size={20} className="mr-3" />
+            <span className="sr-only">(214) 718-7017</span>
+          </a>
+          <a
+            href={company.contact.facebook.url}
+            target="_blank"
+            className="hover:text-gray-500 text-gray-400"
+          >
+            <span className="sr-only">Facebook</span>
+            <BrandFacebook />
+          </a>
+          <a
+            href="mailto:Christilyn74@gmail.com"
+            className="hover:text-gray-500 text-gray-400"
+          >
+            <MailOpened size={20} className="mr-3" />
+            <span className="sr-only">christilyn74@gmail.com</span>
+          </a>
+          <a
+            href={company.contact.messenger}
+            target="_blank"
+            className="hover:text-gray-500 text-gray-400"
+          >
+            <BrandMessenger size={26} className=" mr-3" />
+            <span className="sr-only">Messenger</span>
+          </a>
+        </div>
+        <p className="mt-8 text-base leading-6 text-center text-gray-400">
+          © {year} Moonlight Falls, LLC. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  );
+};
 
 export const ContactOptions: FC<HTMLAttributes<HTMLUListElement>> = (props) => (
   <ul {...props}>

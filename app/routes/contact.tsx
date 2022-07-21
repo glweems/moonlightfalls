@@ -15,7 +15,7 @@ import * as yup from "yup";
 import { ContactOptions } from "~/components/layout";
 import { sendEmail } from "~/mailer.server";
 import { makeDomainFunction } from "remix-domains";
-
+import { Form } from "@remix-run/react";
 export const validator = withYup(
   yup.object({
     name: yup.string().label("Name").required(),
@@ -26,7 +26,7 @@ export const validator = withYup(
 
 // const schema = Joi.object<ContactFormFields>({
 //   name: Joi.string().required(),
-import { Form, formAction } from "remix-forms";
+import { formAction } from "remix-forms";
 //   email: Joi.string().required(),
 //   msg: Joi.string().required(),
 // });
@@ -119,19 +119,76 @@ export default function ContactPage() {
   }, [state]);
 
   return (
-    <div className="hero bg-base-200 w-full min-h-screen">
-      <div className="hero-content place-content-center grid justify-center w-full grid-cols-2">
-        <h1 className="col-span-2 text-5xl font-bold">
-          Hire Us to Manage Your Vacation Rental
-        </h1>
-        <ContactForm
-          schema={schema}
-          labels={{ name: "Name", email: "Email", msg: "Message" }}
-          className="w-full max-w-[30rem] align-center col-span-2 md:col-span-1"
-        />
-        <ContactOptions className="md:col-span-1 col-span-2" />
+    <section className="w-full bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="lg:flex-row flex flex-col">
+          <div className="lg:w-6/12 xl:w-7/12 bg-gradient-to-r from-white via-white to-gray-100 relative w-full bg-cover">
+            <div className="lg:px-16 lg:my-0 relative flex flex-col items-center justify-center w-full h-full px-10 my-20">
+              <div className="lg:max-w-3xl flex flex-col items-start space-y-8 tracking-tight">
+                <div className="relative">
+                  <p className="mb-2 font-medium text-gray-700 uppercase">
+                    Work smarter
+                  </p>
+                  <h2 className="xl:text-6xl text-5xl font-bold text-gray-900">
+                    Get in touch
+                  </h2>
+                </div>
+                <p className="text-2xl text-gray-700">
+                  We've created a simple formula to follow in order to gain more
+                  out of your business and your application.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="lg:w-6/12 xl:w-5/12 w-full bg-white">
+            <div className="lg:p-16 xl:p-24 flex flex-col items-start justify-start w-full h-full p-10">
+              <h4 className="w-full text-3xl font-bold">Contact</h4>
+              <Form className="relative w-full mt-10 space-y-8">
+                <div className="reltive">
+                  <label className="font-medium text-gray-900">Name</label>
+                  <input
+                    type="text"
+                    className="focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50 block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg"
+                    placeholder="Enter Your Name"
+                  />
+                </div>
+                <div className="relative">
+                  <label className="font-medium text-gray-900">Email</label>
+                  <input
+                    name="email"
+                    type="email"
+                    className="focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50 block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg"
+                    placeholder="Enter Your Email Address"
+                  />
+                </div>
+                <div className="relative">
+                  <label className="font-medium text-gray-900">Password</label>
+                  <textarea
+                    name="msg"
+                    className="focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50 block w-full px-4 py-4 mt-2 text-xl placeholder-gray-400 bg-gray-200 rounded-lg"
+                    placeholder="Password"
+                  />
+                </div>
+                <div className="relative">
+                  <a
+                    href="#_"
+                    className="hover:bg-indigo-500 ease inline-block w-full px-5 py-4 text-lg font-medium text-center text-white transition duration-200 bg-indigo-400 rounded-lg"
+                  >
+                    Create Account
+                  </a>
+                  <a
+                    href="#_"
+                    className="hover:bg-gray-100 ease inline-block w-full px-5 py-4 mt-3 text-lg font-bold text-center text-gray-900 transition duration-200 bg-white border border-gray-300 rounded-lg"
+                  >
+                    Submit
+                  </a>
+                </div>
+              </Form>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 /*
