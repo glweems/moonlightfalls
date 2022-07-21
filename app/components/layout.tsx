@@ -15,7 +15,9 @@ import { cx } from "~/helpers";
 
 export const Navbar: FC = () => {
   const [open, setOpen] = useState(false);
-  const handleClick = (e) => {
+  const handleClick: MouseEventHandler<
+    HTMLButtonElement | HTMLAnchorElement
+  > = (e) => {
     setOpen((current) => !current);
   };
   return (
@@ -37,7 +39,6 @@ export const Navbar: FC = () => {
           )}
         >
           <div className="md:bg-transparent md:rounded-none md:relative md:flex md:flex-row md:overflow-auto flex-col w-full overflow-hidden bg-white rounded-lg select-none">
-            s
             <div className="md:text-indigo-200 md:mt-0 md:flex-row md:items-center flex flex-col items-center justify-end w-full h-full mt-12 text-center text-indigo-700">
               {sitemap.map((link) => (
                 <NavLink
@@ -56,34 +57,35 @@ export const Navbar: FC = () => {
           className="md:hidden hover:bg-gray-900 hover:bg-opacity-10 absolute right-0 z-50 flex flex-col items-end w-10 h-10 p-2 mr-4 text-gray-100 rounded-full cursor-pointer"
           onClick={handleClick}
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            style={{ display: open ? "none" : "block" }}
-          >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <svg
-            className="stock-indigo-600 w-6 h-6"
-            x-show="showMenu"
-            fill="none"
-            stroke="indigo-600"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ display: !open ? "none" : "block" }}
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
+          {open ? (
+            <svg
+              className="stroke-indigo-600 w-6 h-6"
+              x-show="showMenu"
+              fill="none"
+              stroke="indigo-600"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          ) : (
+            <svg
+              className="w-6 h-6 stroke-white"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          )}
         </button>
       </div>
     </nav>
