@@ -1,3 +1,4 @@
+import { MetaFunction } from "@remix-run/node";
 import { string } from "joi";
 import { Fragment } from "react";
 
@@ -186,6 +187,12 @@ const properties: Partial<ManagedProperty>[] = [
   // 8 guests · 4 bedrooms · 4 beds · 2.5 baths
 ];
 
+export const meta: MetaFunction = () => {
+  return {
+    title: "Properties",
+    description: "Properties managed by the Moonlight Falls",
+  };
+};
 export default function PropertiesPage() {
   return (
     <div className="md:grid-cols-2 gap container-2xl container grid w-full gap-4">
