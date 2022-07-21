@@ -19,9 +19,9 @@ export const Navbar: FC = () => {
   };
   return (
     <nav className="flex items-center w-full h-24 bg-indigo-600 select-none">
-      <div className="relative flex  items-center justify-between w-full h-24 mx-auto font-medium">
+      <div className="relative flex items-center justify-between w-full h-24 mx-auto font-medium">
         <NavLink to="/" className="md:pl-4 md:py-0 w-1/3 py-4 pl-6 pr-4">
-          <span className="p-1 text-xl font-black leading-none text-white select-none">
+          <span className="whitespace-nowrap p-1 text-xl font-black leading-none text-white select-none">
             <span>Moonlight Falls</span>
             <span className="text-indigo-300">.</span>
           </span>
@@ -39,7 +39,14 @@ export const Navbar: FC = () => {
                   key={link.path}
                   to={link.path}
                   onClick={handleClick}
-                  className="md:text-white md:px-0 lg:mx-3 md:text-center inline-block px-4 py-2 mx-2 font-medium text-left text-indigo-700"
+                  className={({ isActive }) =>
+                    cx(
+                      isActive
+                        ? "text-indigo-600 md:text-indigo-200"
+                        : "text-gray-500 md:text-white",
+                      " md:px-0 lg:mx-3 md:text-center inline-block px-4 py-2 mx-2 font-medium text-left text-indigo-700"
+                    )
+                  }
                 >
                   {link.title}
                 </NavLink>
@@ -69,7 +76,7 @@ export const Navbar: FC = () => {
             </svg>
           ) : (
             <svg
-              className="w-6 h-6 stroke-white"
+              className="stroke-white w-6 h-6"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -96,7 +103,12 @@ export const Footer: FC = () => {
             <div key={link.path} className="px-5 py-2">
               <NavLink
                 to={link.path}
-                className="hover:text-gray-900 text-base leading-6 text-gray-500"
+                className={({ isActive }) =>
+                  cx(
+                    isActive ? "text-indigo-600" : "text-gray-500",
+                    "hover:text-gray-900 text-base leading-6"
+                  )
+                }
               >
                 {link.title}
               </NavLink>
